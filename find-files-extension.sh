@@ -1,0 +1,1 @@
+find . -type f -iregex '.*\.txt' -printf '%f\n' | cut -d '.' -f 1
