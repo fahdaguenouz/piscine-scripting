@@ -1,1 +1,1 @@
-ls -l --time-style=+%F\ %R hard-perm | sed '1d'
+ls -l --time-style=+%F\ %R  | sed '1d'
