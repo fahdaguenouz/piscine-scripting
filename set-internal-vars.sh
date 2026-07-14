@@ -9,5 +9,4 @@ MY_ARR=("one" "two" "three" "four" "five")
 echo "$MY_MESSAGE"
 echo "$MY_NUM"
 echo "$MY_PI"
-IFS=', '
 echo "${MY_ARR[*]}"
