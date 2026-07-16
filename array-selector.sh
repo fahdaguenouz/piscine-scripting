@@ -1,6 +1,6 @@
 #!/bin/bash
 
-colors=("red" "blue" "green" "white" "black")
+arr=("red" "blue" "green" "white" "black")
 
 if [[ $# -ne 1 ]]; then
     echo "Error"
@@ -8,9 +8,9 @@ elif [[ ! $1 =~ ^[0-9]+$ ]]; then
     echo "Error"
 else
     index=$1
-    if (( index < 1 || index > ${#colors[@]} )); then
+    if (( index < 1 || index > ${#arr[@]} )); then
         echo "Error"
     else
-        echo "${colors[index-1]}"
+        echo "${arr[index-1]}"
     fi
 fi
