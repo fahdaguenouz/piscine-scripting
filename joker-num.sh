@@ -1,44 +1,54 @@
 #!/bin/bash
-if [ "$#" -ne 1 ]; then
-    >&2 echo "Error: wrong argument"
-    exit 1
-fi
 
-case "$1" in
-    ''|*[!0-9]*)
-        >&2 echo "Error: wrong argument"
-        exit 1
-        ;;
-esac
-
-if [ "$1" -lt 1 ] || [ "$1" -gt 100 ]; then
+# Check number of arguments
+if [ $# -ne 1 ]; then
     >&2 echo "Error: wrong argument"
     exit 1
 fi
 
 secret=$1
 
-for ((tries=1; tries<=5; )); do
-    tries_left=$((6 - tries))
+# Secret number must be an integer between 1 and 100
+case "$secret" in
+    ''|*[!0-9]*)
+        >&2 echo "Error: wrong argument"
+        exit 1
+        ;;
+esac
+
+if [ "$secret" -lt 1 ] || [ "$secret" -gt 100 ]; then
+    >&2 echo "Error: wrong argument"
+    exit 1
+fi
+
+for ((i=1; i<=5; ))
+do
+    tries_left=$((6 - i))
 
     echo "Enter your guess ($tries_left tries left):"
     read guess
 
-    # Invalid input: empty, non-numeric, or outside 1-100
-    if ! [[ $guess =~ ^[0-9]+$ ]] || [ "$guess" -lt 1 ] || [ "$guess" -gt 100 ]; then
+    # Invalid guess: empty, non-numeric, or outside 1-100
+    case "$guess" in
+        ''|*[!0-9]*)
+            continue
+            ;;
+    esac
+
+    if [ "$guess" -lt 1 ] || [ "$guess" -gt 100 ]; then
         continue
     fi
 
     if [ "$guess" -lt "$secret" ]; then
         echo "Go up"
+        i=$((i + 1))
     elif [ "$guess" -gt "$secret" ]; then
         echo "Go down"
+        i=$((i + 1))
     else
-        echo "Congratulations, you found the number in $tries moves!"
+        echo "Congratulations, you found the number in $i moves!"
         exit 0
     fi
-
-    tries=$((tries + 1))
 done
 
 echo "You lost, the number was $secret"
