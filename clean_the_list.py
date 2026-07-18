@@ -2,11 +2,14 @@ def clean_list(items):
     if not items:
         return []
 
-    cleaned = list(items)
-    if 'milk' not in cleaned:
-        cleaned.append('milk')
+    res = []
+    for item in items:
+        res.append(item.strip())
+
+    if not any(x == 'milk' for x in res):
+        res.append('milk')
 
     result = []
-    for i, item in enumerate(cleaned, start=1):
-        result.append(f'{i}/ {item.strip().capitalize()}')
+    for i, item in enumerate(res, start=1):
+        result.append(f'{i}/ {item.capitalize()}')
     return result
