@@ -1,3 +1,3 @@
 def do_punishment(first, second, nb_lines):
-    li = f"{first.strip()} {second.strip()}."
-    return li * nb_lines
+    line = first.strip() + ' ' + second.strip() + '.\n'
+    return line * nb_lines
