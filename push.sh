@@ -1,4 +1,4 @@
 git add .
 git commit -m "$*"
 git push
-git push gitea
+git push github
